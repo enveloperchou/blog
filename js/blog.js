@@ -9,7 +9,6 @@ app.controller('BlogController', function($scope, $routeParams, $http){
 			url:'http://106.75.76.72:9000/blog',
 			params: {'blog_id':blog_id},	
 		}).success(function(rep){
-				alert(JSON.stringify(rep));
 				$scope.blog = rep;
 			})
 	}(blog_id));
@@ -20,7 +19,6 @@ app.controller('BlogController', function($scope, $routeParams, $http){
 			url:'http://106.75.76.72:9000/list',
 			params:{"filter":$scope.filter},
 		}).success(function(rep){
-				alert(JSON.stringify(rep));
 				$scope.blogs = rep;
 			});
 	};

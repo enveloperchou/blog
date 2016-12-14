@@ -48,7 +48,7 @@
 	__webpack_require__(3);
 	var app = angular.module ('blog', ['ngRoute'], undefined);
 	__webpack_require__(5);
-	__webpack_require__(23);
+	//require('./js/blog.js');
 
 		app.config(['$routeProvider', function($routeProvider){
 			$routeProvider
@@ -62,6 +62,9 @@
 					templateUrl: "./html/console.html"
 				})
 				.when('/admin', {
+					redirectTo: '/admin/empty'
+				})
+				.when('/admin/:blog_id', {
 					templateUrl: "./html/admin.html",
 					controller: "AdminController"
 				})
@@ -33563,9 +33566,23 @@
 	__webpack_require__(6);
 
 	var app = angular.module('blog');
-	app.controller('AdminController', function($scope, $http){
+	app.controller('AdminController', function($scope, $routeParams, $http){
 		var editor = new wangEditor('editor');
 		editor.create();
+		/*
+		if($routeParams['blog_id'] == 'empty'){
+			$scope.blog = {'content':'请输入内容', 'title':'', 'subtitle':'', 'description':''};
+		}else{
+			$http({
+				method: 'GET',
+				url: 'http://106.75.76.72:9000/blog',
+				params: {'blog_id':$routeParams['blog_id']}
+			}).success(function(rep){
+					$scope.blog = rep;
+				})
+		}
+		*/
+
 		$scope.publish = function(){
 			var content = "content=" + editor.$txt.html() + "&title=" + $scope.title + "&subtitle=" + $scope.subtitle + "&description=" + $scope.description;	
 			$http({
@@ -33577,7 +33594,21 @@
 					alert(rep);
 				});
 		};
-	})
+
+		/*
+		$scope.list = function(filter){
+			$http({
+				method:'GET',
+				url:'http://106.75.76.72:9000/list',
+				params:{"filter":$scope.filter},
+			}).success(function(rep){
+					$scope.blogs = rep;
+				});
+		};
+
+		$scope.list();
+		*/
+	});
 
 
 /***/ },
@@ -62271,41 +62302,6 @@
 
 	return jQuery;
 	}));
-
-
-/***/ },
-/* 23 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var angular = __webpack_require__(1);
-
-	var app = angular.module('blog');
-	app.controller('BlogController', function($scope, $routeParams, $http){
-		var blog_id = $routeParams['blog_id'];
-		(function(blog_id){
-			$http({
-				method:'GET',
-				url:'http://106.75.76.72:9000/blog',
-				params: {'blog_id':blog_id},	
-			}).success(function(rep){
-					alert(JSON.stringify(rep));
-					$scope.blog = rep;
-				})
-		}(blog_id));
-		
-		$scope.list = function(filter){
-			$http({
-				method:'GET',
-				url:'http://106.75.76.72:9000/list',
-				params:{"filter":$scope.filter},
-			}).success(function(rep){
-					alert(JSON.stringify(rep));
-					$scope.blogs = rep;
-				});
-		};
-
-		$scope.list();
-	});
 
 
 /***/ }

@@ -16,6 +16,9 @@ require('./js/blog.js');
 				templateUrl: "./html/console.html"
 			})
 			.when('/admin', {
+				redirectTo: '/admin/empty'
+			})
+			.when('/admin/:blog_id', {
 				templateUrl: "./html/admin.html",
 				controller: "AdminController"
 			})
