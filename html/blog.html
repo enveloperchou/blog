@@ -1,1 +1,60 @@
-<div id="blog"></div>
+    <div class="container">
+
+      <div class="blog-header">
+        <h1 class="blog-title">{{ blog.title }}</h1>
+        <p class="lead blog-description">{{ blog.description }}</p>
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+
+          <div class="blog-post">
+            <h2 class="blog-post-title">{{ blog.subtitle }}</h2>
+            <p class="blog-post-meta">{{ blog.time }}</p>
+			{{ blog.content }}
+          </div><!-- /.blog-post -->
+
+          <nav>
+            <ul class="pager">
+              <li><a href="#">Previous</a></li>
+              <li><a href="#">Next</a></li>
+            </ul>
+          </nav>
+
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          <div class="sidebar-module">
+			<div class="input-group">
+      			<input type="text" class="form-control" ng-model="filter">
+      			<span class="input-group-btn">
+        			<button class="btn btn-default" type="button" ng-click="list()">Search!</button>
+      			</span>
+    		</div>
+            <h4>Archives</h4>
+            <ol class="list-unstyled">
+				<li ng-repeat="blog in blogs">
+					{{ blog.time }}
+				</li>
+            </ol>
+          </div>
+          <div class="sidebar-module">
+            <h4>Elsewhere</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">GitHub</a></li>
+              <li><a href="#">DockerHub</a></li>
+            </ol>
+          </div>
+        </div><!-- /.blog-sidebar -->
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <div class="blog-footer">
+      <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </div>

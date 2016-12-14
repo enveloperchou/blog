@@ -2,6 +2,7 @@ var angular = require('angular');
 require('angular-route');
 var app = angular.module ('blog', ['ngRoute'], undefined);
 require('./js/admin.js');
+require('./js/blog.js');
 
 	app.config(['$routeProvider', function($routeProvider){
 		$routeProvider
@@ -9,7 +10,7 @@ require('./js/admin.js');
 				templateUrl: "./html/lab.html" 
 			})
 			.when('/blog', {
-				templateUrl: "./html/blog.html"
+				redirectTo: '/blog/latest' 
 			})
 			.when('/console', {
 				templateUrl: "./html/console.html"
@@ -17,6 +18,10 @@ require('./js/admin.js');
 			.when('/admin', {
 				templateUrl: "./html/admin.html",
 				controller: "AdminController"
+			})
+			.when('/blog/:blog_id', {
+				templateUrl: "./html/blog.html",
+				controller: "BlogController"
 			})
 	}]);
 module.exports = app ;
